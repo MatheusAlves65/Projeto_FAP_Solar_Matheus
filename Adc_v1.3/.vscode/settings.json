@@ -12,5 +12,9 @@
     ],
     "idf.port": "/dev/tty.usbserial-0001",
     "idf.pythonBinPath": "/Users/matheus/.espressif/python_env/idf5.4_py3.11_env/bin/python",
-    "idf.toolsPath": "/Users/matheus/.espressif"
+    "idf.toolsPath": "/Users/matheus/.espressif",
+    "idf.flashType": "UART",
+    "files.associations": {
+        "ringbuf.h": "c"
+    }
 }
