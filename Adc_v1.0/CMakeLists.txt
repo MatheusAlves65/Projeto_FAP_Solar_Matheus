@@ -7,3 +7,4 @@ cmake_minimum_required(VERSION 3.5)
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(Adc_v1.0)
 # Adiciona os arquivos fonte ao componente principal
+add_subdirectory(main)
