@@ -34,18 +34,22 @@ void buffer_init() {
 void adc_task(void *pvParameter) {
     TickType_t last_wake_time = xTaskGetTickCount();
     const TickType_t sampling_period = pdMS_TO_TICKS(1); // 1 ms para 1000 SPS
+    int samples_in_buffer = 0;
 
     while (1) {
         uint16_t adcValue = adc1_get_raw(ADC1_CHANNEL_0);
         size_t item_size = sizeof(adcValue);
-        BaseType_t result = xRingbufferSend(adcBuffer, &adcValue, item_size, pdMS_TO_TICKS(1));
-        if (result != pdTRUE) {
+        BaseType_t result = xRingbufferSend(adcBuffer, &adcValue, item_size, pdMS_TO_TICKS(100));
+        if (result == pdTRUE) {
+            samples_in_buffer++;
+        } else {
             printf("Failed to send to ring buffer\n");
         }
 
         // Verificar se o buffer está cheio
-        if (uxRingbufferGetCount(adcBuffer) == BUFFER_SIZE) {
+        if (samples_in_buffer == BUFFER_SIZE) {
             cycleCount++;
+            samples_in_buffer = 0; // Resetar o contador de amostras no buffer
             if (cycleCount == CYCLES_TO_SAMPLE) {
                 // Exibir amostra no terminal
                 size_t item_size;
@@ -53,6 +57,8 @@ void adc_task(void *pvParameter) {
                 if (sampleValue != NULL) {
                     printf("Sampled ADC Value: %d\n", *sampleValue);
                     vRingbufferReturnItem(adcBuffer, (void *) sampleValue);
+                    // Atraso para desacelerar a exibição no terminal
+                    vTaskDelay(pdMS_TO_TICKS(200));
                 }
                 cycleCount = 0; // Reiniciar contagem de ciclos
             }
