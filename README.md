@@ -2,10 +2,12 @@
 
 Projeto pela FAP Solar 
 
-Repositorio pela parte de firmware do projeto
+Repositorio pela parte de Documentação do projeto
 
 Aluno: Matheus Alves do Nascimento
 
-Matricula: 200073206
-
 Email: 200073206@aluno.unb.br
+
+Aluno: Flavia Naomi Honda Nagata
+
+Email: 190106662@aluno.unb.br
