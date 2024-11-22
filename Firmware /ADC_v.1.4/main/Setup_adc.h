@@ -6,8 +6,8 @@
 
 // Define ADC1_CHANNEL_2 if not defined
 #define ADC1_CHANNEL_2 ADC_CHANNEL_2 // tensao
-#define ADC1_CHANNEL_3 ADC_CHANNEL_3 // tensao
-#define ADC1_CHANNEL_2 ADC_CHANNEL_2 // tensao
+#define ADC1_CHANNEL_3 ADC_CHANNEL_3 // corrente
+#define ADC1_CHANNEL_4 ADC_CHANNEL_4 // temperatura
 
 
 void adc_init_voltage (void);

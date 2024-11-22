@@ -4,15 +4,18 @@
 #include "freertos/task.h"
 #include "Setup_adc.h"
 
+void adc_init_voltage();
+void adc_init_current();
+void adc_init_temp();
 
 
 void app_main(void)
 {
     
     while (1) {
-        void adc_init_voltage();
-        void adc_init_current();
-        void adc_init_temp();
+         adc_init_voltage();
+         adc_init_current();
+         adc_init_temp();
 
         // Aguardar um pouco antes de ler novamente
         vTaskDelay(pdMS_TO_TICKS(1000));
