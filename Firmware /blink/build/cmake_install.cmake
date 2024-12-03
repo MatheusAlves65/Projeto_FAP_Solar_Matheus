@@ -1,4 +1,4 @@
-# Install script for directory: /Users/matheus/Documents/FAP_solar/blink
+# Install script for directory: /Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,12 +34,12 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/Users/matheus/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/xtensa-esp32-elf-objdump")
+  set(CMAKE_OBJDUMP "/Users/matheus/.espressif/tools/riscv32-esp-elf/esp-13.2.0_20240530/riscv32-esp-elf/bin/riscv32-esp-elf-objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/matheus/Documents/FAP_solar/blink/build/esp-idf/cmake_install.cmake")
+  include("/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/esp-idf/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/matheus/Documents/FAP_solar/blink/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

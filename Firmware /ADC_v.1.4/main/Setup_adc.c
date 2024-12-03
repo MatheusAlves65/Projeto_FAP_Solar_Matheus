@@ -8,6 +8,7 @@
 int adc_value_2;
 int adc_value_3;
 int adc_value_1;
+float tensao;
 
 void adc_setup(void) {
     // Inicializar o ADC
@@ -19,15 +20,19 @@ void adc_setup(void) {
     adc1_config_channel_atten(ADC1_CHANNEL_1, ADC_ATTEN_DB_0);
 }
 
-void adc_init_voltage (void) { // Configurando a resolução do ADC para a leitura de voltagem
+float adc_init_voltage(float tensao) { // Configurando a resolução do ADC para a leitura de voltagem
     adc_value_2 = adc1_get_raw(ADC1_CHANNEL_2);
     float tensao_medida = (adc_value_2 / (float)ADC_Max_value) * Max_Value_Voltage;
-    printf("Tensão Medida: %.2f\n", tensao_medida);
-} 
+    tensao = tensao_medida;
+    //printf("Tensão Medida: %.2f\n", tensao_medida);
+    return tensao;
+}
+
+float corrent_medida;
 
 void adc_init_current (void) { // Configurando a resolução do ADC para leitura da corrente
     adc_value_3 = adc1_get_raw(ADC1_CHANNEL_3);
-    float corrent_medida = (adc_value_3 / (float)ADC_Max_value) * Max_Value_Voltage; // arrumar!!!!
+    corrent_medida = (adc_value_3 / (float)ADC_Max_value) * Max_Value_Voltage; // arrumar!!!!
     printf("Corrente Medida: %.2f\n", corrent_medida);
 }
 

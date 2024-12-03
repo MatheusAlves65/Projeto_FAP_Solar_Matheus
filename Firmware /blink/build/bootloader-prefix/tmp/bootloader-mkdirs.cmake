@@ -5,18 +5,18 @@ cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
   "/Users/matheus/esp/esp-idf/components/bootloader/subproject"
-  "/Users/matheus/Documents/FAP_solar/blink/build/bootloader"
-  "/Users/matheus/Documents/FAP_solar/blink/build/bootloader-prefix"
-  "/Users/matheus/Documents/FAP_solar/blink/build/bootloader-prefix/tmp"
-  "/Users/matheus/Documents/FAP_solar/blink/build/bootloader-prefix/src/bootloader-stamp"
-  "/Users/matheus/Documents/FAP_solar/blink/build/bootloader-prefix/src"
-  "/Users/matheus/Documents/FAP_solar/blink/build/bootloader-prefix/src/bootloader-stamp"
+  "/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/bootloader"
+  "/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/bootloader-prefix"
+  "/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/bootloader-prefix/tmp"
+  "/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/bootloader-prefix/src/bootloader-stamp"
+  "/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/bootloader-prefix/src"
+  "/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/Users/matheus/Documents/FAP_solar/blink/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/Users/matheus/Documents/FAP_solar/blink/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/Users/matheus/Documents/FAP_solar/Projeto_FAP_Solar_Matheus/Firmware /blink/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

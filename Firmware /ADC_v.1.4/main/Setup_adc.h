@@ -10,7 +10,7 @@
 #define ADC1_CHANNEL_4 ADC_CHANNEL_4 // temperatura
 
 
-void adc_init_voltage (void);
+float adc_init_voltage(float tensao);
 
 void adc_init_current (void);
 
