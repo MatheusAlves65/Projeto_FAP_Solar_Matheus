@@ -8,15 +8,15 @@
 
 float tensao_pos_func;
 // Tamanho do buffer em bytes
-#define BUFFER_SIZE 192
+#define BUFFER_SIZE 768
 
 // Ponteiro para o ringbuffer
 static RingbufHandle_t ringbuf;
 
 void writer_task(void *param) {
-    float adc_data[48]; // Array to store 48 float values (192 bytes)
+    float adc_data[192]; // Array to store 48 float values (192 bytes)
     while (1) {
-        for (int i = 0; i < 48; i++) {
+        for (int i = 0; i < 192; i++) {
             tensao_pos_func = adc_init_voltage(tensao_pos_func);
             adc_data[i] = tensao_pos_func; // Leitura do ADC
         }
@@ -26,7 +26,7 @@ void writer_task(void *param) {
             printf("Falha ao enviar dados para o ringbuffer\n");
         
         }
-        vTaskDelay(pdMS_TO_TICKS(2000)); // Espera 2 segundos antes de enviar novamente
+        vTaskDelay(pdMS_TO_TICKS(1000)); // Espera 2 segundos antes de enviar novamente
     }
 }
 // Tarefa para ler do ringbuffer
@@ -49,7 +49,7 @@ void reader_task(void *param) {
         } else {
             printf("Nenhum dado recebido\n");
         }
-        vTaskDelay(pdMS_TO_TICKS(2000)); // Espera 2 segundos antes de tentar ler novamente
+        vTaskDelay(pdMS_TO_TICKS(1000)); // Espera 2 segundos antes de tentar ler novamente
     }
 }
 
