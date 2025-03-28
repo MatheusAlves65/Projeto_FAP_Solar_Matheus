@@ -9,10 +9,22 @@
 #define ADC1_CHANNEL_3 ADC_CHANNEL_3 // corrente
 #define ADC1_CHANNEL_4 ADC_CHANNEL_4 // temperatura
 
+#define V_REF 1100.0 // Referência do ADC em mV (ajuste conforme necessário)
 
-float adc_init_voltage(void);
 
-float adc_init_current (void);
+
+typedef struct {
+    float tensao_medida;
+    float corrente_medida;
+} Medicoes_ADC;
+
+// Variável global para armazenar a última medição
+extern Medicoes_ADC medidas;
+
+void adc_setup(void);
+
+void adc_init_Reading();
+
 
 void adc_init_temp (void);
 

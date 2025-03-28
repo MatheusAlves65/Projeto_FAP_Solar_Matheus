@@ -4,6 +4,6 @@
 #include "esp_timer.h"
 
 // Função para inicializar o timer
-void iniciar_timer(float (*callback)(void));
+void iniciar_timer();
 extern volatile uint32_t contador_chamadas; // Variável global para monitoramento
 #endif
