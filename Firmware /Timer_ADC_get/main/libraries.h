@@ -6,11 +6,11 @@
 #include "Timer.h"
 #include "Setup_adc.h"
 #include "Tasks.h"
+#include "global.h"
 #include <stdio.h>
 #include <driver/adc.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "Setup_adc.h"
 #include "freertos/ringbuf.h"
 #include "esp_log.h"
 

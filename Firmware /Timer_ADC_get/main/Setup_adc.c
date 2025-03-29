@@ -1,4 +1,6 @@
 #include "libraries.h"
+#include "global.h"
+
 
 
 
@@ -7,12 +9,15 @@ int adc_value_3;
 int adc_value_1;
 void adc_setup(void) {
     // Inicializar o ADC
+    adc1_channel_t channel2 = ADC1_CHANNEL_2;
+    adc1_channel_t channel3 = ADC1_CHANNEL_3;
+    adc1_channel_t channel4 = ADC1_CHANNEL_4;
     adc1_config_width(ADC_WIDTH_BIT_12);
 
     // Configurar os canais ADC 2, 3 e 4, atenuaçao
-    adc1_config_channel_atten(ADC1_CHANNEL_2, ADC_ATTEN_DB_0);
-    adc1_config_channel_atten(ADC1_CHANNEL_3, ADC_ATTEN_DB_0);
-    adc1_config_channel_atten(ADC1_CHANNEL_4, ADC_ATTEN_DB_0);
+    adc1_config_channel_atten(channel2, ADC_ATTEN_DB_0);
+    adc1_config_channel_atten(channel3, ADC_ATTEN_DB_0);
+    adc1_config_channel_atten(channel4, ADC_ATTEN_DB_0);
 }
 
 void adc_init_Reading() { // Configurando a resolução do ADC para a leitura de voltagem

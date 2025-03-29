@@ -15,7 +15,8 @@
         "esp_adc_cal.h": "c",
         "adc_types.h": "c",
         "soc_caps.h": "c",
-        "setup_adc.h": "c"
+        "setup_adc.h": "c",
+        "esp_log.h": "c"
     },
     "idf.customExtraVars": {
         "OPENOCD_SCRIPTS": "/Users/matheus/.espressif/tools/openocd-esp32/v0.12.0-esp32-20240318/openocd-esp32/share/openocd/scripts",

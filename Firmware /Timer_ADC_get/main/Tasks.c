@@ -1,10 +1,11 @@
 #include "libraries.h"
+#include "global.h"
 
 // Ponteiro para o ringbuffer
 static RingbufHandle_t ringbuf;
 
-// Handle da task global
-TaskHandle_t Handle_voltage_read = NULL;
+// Declare a variável como extern para evitar a definição múltipla
+//extern TaskHandle_t Handle_voltage_read;
 
 void writer_task(void *param) {
     float adc_data[192]; // Array to store 48 float values (192 bytes)
@@ -34,7 +35,7 @@ void voltage_read(void *param) {
         vTaskDelay(pdMS_TO_TICKS(1000)); // Aguarda 1 segundo
 
         // Exibe os valores mais recentes da medição
-        printf("Tensão medida: %.2f V\n", medidas.tensao_medida);
-        printf("Corrente medida: %.2f A\n", medidas.corrente_medida);
+        printf("Tensão medida: %.2f \n", medidas.tensao_medida);
+        printf("Corrente medida: %.2f \n", medidas.corrente_medida);
     }
 }
