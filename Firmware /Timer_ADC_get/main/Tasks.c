@@ -33,6 +33,7 @@ void voltage_read(void *param) {
 
     while (1) {
         vTaskDelay(pdMS_TO_TICKS(1000)); // Aguarda 1 segundo
+        //sdks
 
         // Exibe os valores mais recentes da medição
         printf("Tensão medida: %.2f \n", medidas.tensao_medida);
