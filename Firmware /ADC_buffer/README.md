@@ -219,7 +219,85 @@ void adc_init_temp(void) {
 - **`adc_setup()`**: Configura os canais ADC 2, 3 e 4 com resolução de 12 bits e atenuação de 0dB.
 - **`adc_init_Reading()`**:
 
+```c
+    adc_value_2 = adc1_get_raw(ADC1_CHANNEL_2);
+```
+- Lê o valor bruto do ADC no canal 2, que é utilizado para medir a tensão.
 
+```c
+    adc_value_3 = adc1_get_raw(ADC1_CHANNEL_3);
+```
+- Lê o valor bruto do ADC no canal 3, usado para medir a corrente.
+
+```c
+    medidas.tensao_medida = ((float)adc_value_2 / ADC_Max_value) * V_REF;
+```
+- Converte o valor lido no canal 2 para uma tensão real em volts, com base no valor máximo do ADC e a tensão de referência (`V_REF`).
+
+```c
+    medidas.corrente_medida = ((float)adc_value_3 / ADC_Max_value) * V_REF;
+```
+- Converte o valor lido no canal 3 para uma corrente estimada (também em volts, caso seja em shunt resistivo).
+
+```c
+    printf("Armazenando tensão %.3f V na posição %d do buffer\n", 
+           medidas.tensao_medida, medidas.index_primeiro);
+```
+- Mostra no terminal a tensão armazenada e a posição do buffer onde será inserida.
+
+```c
+    medidas.PrimeiraCamada[medidas.index_primeiro] = medidas.tensao_medida;
+```
+- Armazena o valor da tensão convertida na posição atual do buffer circular da primeira camada.
+
+```c
+    medidas.index_primeiro = (medidas.index_primeiro + 1) % PrimeiraCamada_Length;
+```
+- Incrementa o índice da primeira camada de forma circular (volta ao 0 quando atinge o fim).
+
+```c
+    if (medidas.index_primeiro >= 191) {
+```
+- Verifica se o índice chegou ao fim do buffer (posição 191), indicando que 192 amostras foram coletadas.
+
+```c
+        printf("\n--- Início do processamento do buffer ---\n");
+```
+- Indica no terminal o início do processamento das amostras.
+
+```c
+        medidas.index_primeiro = 0;
+```
+- Reinicia o índice da primeira camada para iniciar um novo ciclo de coleta.
+
+```c
+        float soma = 0.0;
+```
+- Inicializa a variável para somar todas as 192 amostras.
+
+```c
+        for(int i = 0; i < PrimeiraCamada_Length; i++) {
+            soma += medidas.PrimeiraCamada[i];
+```
+- Percorre todas as posições do buffer da primeira camada e acumula os valores.
+
+```c
+            if ((i + 1) % 32 == 0) {
+                printf("Soma parcial após %d amostras: %.3f\n", i + 1, soma);
+            }
+```
+- A cada 32 amostras somadas, imprime o valor parcial da soma.
+
+```c
+        }
+        float media = soma / PrimeiraCamada_Length;
+```
+- Calcula a média das 192 amostras.
+
+```c
+        printf("Soma total: %.3f\n", soma);
+        printf("Média calculada: %.3f V\n", media);
+```
 
 
 
