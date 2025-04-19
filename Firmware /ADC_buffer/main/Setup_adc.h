@@ -9,10 +9,13 @@
 
 void adc_setup(void);
 
-void adc_init_Reading();
+void Instant_Acquisition();
 
+void After_Acquisition();
 
 void adc_init_temp (void);
+
+
 
 
 

@@ -2,7 +2,7 @@
 #define GLOBAL_H
 
 #include <stdint.h>
-#define PrimeiraCamada_Length        192
+#define PrimeiraCamada_Length        191
 #define SecondLevel_Length           15
 #define TerceiraCamada_Length        200
 #define QuartaCamada_Length          12
@@ -21,7 +21,7 @@ typedef struct {
     float QuintaCamada[QuintaCamada_Length];
         
     uint8_t index_primeiro;
-    uint8_t index__segundo;
+    uint8_t index_segundo;
     uint8_t index__Terceiro;
     uint8_t index__quarto;
     uint8_t index__Quinto;

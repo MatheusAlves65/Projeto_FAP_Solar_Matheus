@@ -7,6 +7,10 @@
 void voltage_read(void *param) {
     printf("Task Voltage Read iniciando...\n");
 
+
+
+    //Inicialização do ADC
+    adc_setup();
     // Iniciar o Timer que chamará adc_init_Reading periodicamente
     iniciar_timer();
 

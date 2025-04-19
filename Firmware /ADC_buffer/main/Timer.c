@@ -4,8 +4,9 @@
 volatile uint32_t contador_chamadas = 0; // Contador global para monitoramento
 
 void Timer_ISR(void *param) {
-    adc_init_Reading(); // Atualiza os valores da variável global "medidas"
+    Instant_Acquisition(); // Atualiza os valores da variável global "medidas"
 }
+
 
 void iniciar_timer(void) {
 
@@ -19,3 +20,4 @@ void iniciar_timer(void) {
     ESP_ERROR_CHECK(esp_timer_start_periodic(timer_handler, 100000)); // 500 microsegundos
 }
 
+//ESP_ERROR_CHECK(esp_timer_stop(timer_handler)); // Para o timer
