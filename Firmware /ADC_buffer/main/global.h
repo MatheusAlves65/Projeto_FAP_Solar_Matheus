@@ -2,7 +2,7 @@
 #define GLOBAL_H
 
 #include <stdint.h>
-#define PrimeiraCamada_Length        191
+#define PrimeiraCamada_Length        192
 #define SecondLevel_Length           15
 #define TerceiraCamada_Length        200
 #define QuartaCamada_Length          12
@@ -28,6 +28,13 @@ typedef struct {
 
     uint32_t primeiro_nivel_ciclos; 
 } Medicoes_ADC;
+
+//Tags para o LOG da ESP32
+static const char *Instant = "Instant_adc"; // Tag para identificar os logs da função Instant_Acquisition
+static const char *After_Instant = "After_Instant_adc"; // Tag para identificar os logs da função After_Acquisition
+static const char *Tasks = "Inside_Task"; // Tag para identificar os logs das tasks
+
+
 
 // Declaração externa da variável global
 extern Medicoes_ADC medidas;

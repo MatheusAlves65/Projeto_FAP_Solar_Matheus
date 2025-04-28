@@ -15,4 +15,7 @@
 #include "esp_log.h"
 #include <stdint.h>
 
+#include "esp_log.h" // Biblioteca para ESP_LOG
+
+
 #endif

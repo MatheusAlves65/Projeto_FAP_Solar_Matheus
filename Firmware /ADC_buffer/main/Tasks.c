@@ -1,23 +1,38 @@
 #include "libraries.h"
 #include "global.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/semphr.h"
+#include "esp_log.h" // Biblioteca para ESP_LOG
 
-
-
+extern volatile uint32_t contador_chamadas; // Declaração do contador global
 
 void voltage_read(void *param) {
-    printf("Task Voltage Read iniciando...\n");
+    ESP_LOGD("Tasks", "Task Voltage Read iniciando...\n");
 
+    // Cria o semaphore binário
+    SemaphoreHandle_t timer_semaphore = xSemaphoreCreateBinary();
+    if (timer_semaphore == NULL) {
+        ESP_LOGE("Tasks", "Falha ao criar o semaphore.");
+        vTaskDelete(NULL);
+    }
 
-
-    //Inicialização do ADC
+    // Inicialização do ADC
     adc_setup();
-    // Iniciar o Timer que chamará adc_init_Reading periodicamente
-    iniciar_timer();
+
+    // Inicia o Timer e passa o semaphore
+    iniciar_timer(timer_semaphore);
 
     while (1) {
-        vTaskDelay(pdMS_TO_TICKS(1000)); // Aguarda 1 segundo
-        //sdks
+        // Aguarda o semaphore ser liberado pelo timer
+        if (xSemaphoreTake(timer_semaphore, portMAX_DELAY) == pdTRUE) {
+            // Verifica se o buffer foi processado
+            if (medidas.index_primeiro == 0) { // Buffer completo
+                After_Acquisition();
 
-        // Exibe os valores mais recentes da mediçã
+                // Debug: Indica que After_Acquisition foi chamada
+                ESP_LOGI("Tasks", "After_Acquisition chamada após 192 amostras.\n");
+            }
+        }
     }
 }
