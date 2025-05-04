@@ -27,11 +27,10 @@ void voltage_read(void *param) {
         // Aguarda o semaphore ser liberado pelo timer
         if (xSemaphoreTake(timer_semaphore, portMAX_DELAY) == pdTRUE) {
             // Verifica se o buffer foi processado
-            if (medidas.index_primeiro == 0) { // Buffer completo
+            if (buffer_completo == true) {
                 After_Acquisition();
-
-                // Debug: Indica que After_Acquisition foi chamada
-                ESP_LOGI("Tasks", "After_Acquisition chamada após 192 amostras.\n");
+                buffer_completo = false; // Reset do flag após processamento
+                ESP_LOGI("Tasks", "After_Acquisition executada e buffer_completo resetado");
             }
         }
     }
