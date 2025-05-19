@@ -1,0 +1,23 @@
+#ifndef libraries_H
+#define libraries_H
+
+#include <stdio.h>
+#include "esp_timer.h"
+#include "Timer.h"
+#include "Energy.h"
+#include "Tasks.h"
+#include "Temp.h"
+#include "global.h"
+#include <stdio.h>
+#include <driver/adc.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/ringbuf.h"
+#include "esp_log.h"
+#include <stdint.h>
+#include "esp_task_wdt.h"
+
+#include "esp_log.h" // Biblioteca para ESP_LOG
+
+
+#endif

@@ -5,16 +5,12 @@
 #include "esp_task_wdt.h"
 
 // Add volatile flag to prevent multiple concurrent executions
- bool isr_in_progress = false;
+
 
 SemaphoreHandle_t timer_semaphore = NULL; // Semaphore para sincronizar o timer com a task
 
 void Timer_ISR(void *param) {
-    // Prevent re-entrance
-    if (isr_in_progress) {
-        return;
-    }
-    isr_in_progress = true;
+
     
     Instant_Acquisition();
 
@@ -24,7 +20,7 @@ void Timer_ISR(void *param) {
         portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
     }
     
-    isr_in_progress = false;
+   
 }
 
 void iniciar_timer(SemaphoreHandle_t semaphore) {
@@ -40,5 +36,5 @@ void iniciar_timer(SemaphoreHandle_t semaphore) {
 
     esp_timer_handle_t timer_handler;
     ESP_ERROR_CHECK(esp_timer_create(&my_timer_args, &timer_handler));
-    ESP_ERROR_CHECK(esp_timer_start_periodic(timer_handler, 1024)); // 1ms period for 1kHz
+    ESP_ERROR_CHECK(esp_timer_start_periodic(timer_handler, 1042)); // 1ms period for 1kHz
 }
