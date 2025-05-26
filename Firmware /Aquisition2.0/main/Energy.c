@@ -3,8 +3,11 @@
 #include "esp_log.h" // Biblioteca para ESP_LOG
 #include "esp_log_color.h" // Biblioteca para ESP_LOG
 
+#include <stdbool.h> // Para o tipo bool
+
 int adc_value_2;
 int adc_value_3;
+extern volatile bool buffer_completo; // Use a variável global
 
 void adc_setup(void) {
     // Inicializar o ADC
@@ -20,11 +23,8 @@ void adc_setup(void) {
 }
 
 void Instant_Acquisition(Energy_ADC *p) {
-    //static int64_t buffer_start_time = 0;
-    // Remova: static bool buffer_completo = false;
-    // Inicializa o tempo de início quando o índice é 0
-
     adc_value_2 = adc1_get_raw(p->adc_channel);
+
     p->instant_value = ((float)adc_value_2 / ADC_Max_value) * V_REF;
 
     // Armazena os valores no buffer do primeiro nível
@@ -35,79 +35,39 @@ void Instant_Acquisition(Energy_ADC *p) {
 
     // Verifica se o buffer do primeiro nível está completo
     if (p->index_primeiro == 0) {
-        //int64_t buffer_end_time = esp_timer_get_time();
-        //int64_t total_buffer_time = buffer_end_time - buffer_start_time;
-
-        // Log do tempo do primeiro nível
-        //ESP_LOGI("Timing", "Tempo do primeiro nível: %lld us", total_buffer_time);
-
-        // Para calcular a média do primeiro nível:
         p->media = calcular_media(p->PrimeiraCamada, PrimeiraCamada_Length);
-
-        // Agora usa a global
+        ESP_LOGI("BUFFER1", "[%s] Buffer do primeiro nível completo. Média: %.3f", p->tipo, p->media);
+        buffer_completo = true; // <-- Adicione esta linha
     }
 }
 
 void After_Acquisition(Energy_ADC *p) {
-    //static int64_t buffer_start_time2 = 0;
-
 
     // Armazena as médias do primeiro nível no segundo nível
     p->SegundaCamada[p->index_segundo] = p->media;
 
-    // --- Leitura e armazenamento da temperatura usando a struct ---
-
     // Incrementa os índices do segundo nível
     p->index_segundo = (p->index_segundo + 1) % SecondLevel_Length;
+    ESP_LOGI("BUFFER2", "Novo índice do segundo nível: %d", p->index_segundo);
 
     // Verifica se o buffer do segundo nível está completo
     if (p->index_segundo == 0) {
-  
-
-        //ESP_LOGI("Timing", "Tempo do segundo nível: %lld us", total_buffer_time2);
-
-        float media_v2 = calcular_media(p->SegundaCamada, SecondLevel_Length);
-
+        float media_segundo = calcular_media(p->SegundaCamada, SecondLevel_Length);
+        ESP_LOGI("BUFFER2", "[%s] Buffer do segundo nível completo. Média: %.3f", p->tipo, media_segundo);
 
         // ---- Terceiro nivel --------
-
-
-        // Armazena as médias no terceiro nível
-        p->TerceiraCamada[p->index__Terceiro] = media_v2;
+        p->TerceiraCamada[p->index__Terceiro] = media_segundo;
 
         // Incrementa os índices do terceiro nível
         p->index__Terceiro = (p->index__Terceiro + 1) % TerceiraCamada_Length;
-        //ESP_LOGI(V_Third, "Índice do terceiro nível de %d: %d",p->tipo, p->index__Terceiro);
+        ESP_LOGI("BUFFER3", "Novo índice do terceiro nível: %d", p->index__Terceiro);
 
-
-        // Adicione uma variável estática para armazenar o tempo de início do terceiro nível
-        //static int64_t buffer_start_time3 = 0;
-
-        // Dentro da verificação do terceiro nível
         if (p->index__Terceiro == 0) {
-            // Se o índice for 0, significa que o terceiro nível foi preenchido
+            ESP_LOGI("BUFFER3", "Buffer do terceiro nível completo.");
             
-
-            // Log do tempo total do terceiro nível
-
-            // Reinicia o tempo de início para o próximo ciclo
-            //buffer_start_time3 = esp_timer_get_time();
-
-            // Calcula a média do terceiro nível
-            /*float soma_v3 = 0.0, soma_i3 = 0.0;
-            for (int i = 0; i < TerceiraCamada_Length; i++) {
-                soma_v3 += p->TerceiraCamada[i];
-            }
-            float media_v3 = soma_v3 / TerceiraCamada_Length;*/
-
-            //ESP_LOGI(V_Third, "Média do terceiro nível de %d: %.3f V",p->tipo, media_v3);
-        } else {
-            // Inicializa o tempo de início na primeira execução
-
         }
     }
 }
-
 
 float calcular_media(const float *vetor, int tamanho) {
     float soma = 0.0f;

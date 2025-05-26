@@ -1,10 +1,8 @@
 #include "global.h"
 #include <stdbool.h>
 
-// Definindo a variável global para armazenar as medições do ADC
+volatile bool buffer_completo = false; // Definição da variável global
 
-// Definição da variável global
-bool buffer_completo = false;
 
 // Função para calcular media
 
