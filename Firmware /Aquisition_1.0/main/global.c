@@ -1,15 +1,10 @@
 #include "global.h"
+#include <stdbool.h>
 
 // Definindo a variável global para armazenar as medições do ADC
-Energy_ADC Tensao;
-Energy_ADC Corrente;
-Temp_ADC Temperatura;
-
-
 
 // Definição da variável global
 bool buffer_completo = false;
-
 
 // Função para calcular media
 

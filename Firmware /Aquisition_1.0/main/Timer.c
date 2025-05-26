@@ -11,8 +11,7 @@ SemaphoreHandle_t timer_semaphore = NULL; // Semaphore para sincronizar o timer 
 
 void Timer_ISR(void *param) {
 
-    
-    Instant_Acquisition();
+    Instantaneous_Energy();
 
     if (timer_semaphore != NULL) {
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;

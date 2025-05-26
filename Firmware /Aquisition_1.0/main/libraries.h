@@ -5,6 +5,7 @@
 #include "esp_timer.h"
 #include "Timer.h"
 #include "Energy.h"
+#include "main_funcs.h"
 #include "Tasks.h"
 #include "Temp.h"
 #include "global.h"
