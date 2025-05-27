@@ -15,6 +15,7 @@ typedef struct {
     const char* tipo;
 }Temp_ADC ;
 
+float calcular_media_temp(const float *vetor, int tamanho);
 
 void adc_init_temp(void);
 

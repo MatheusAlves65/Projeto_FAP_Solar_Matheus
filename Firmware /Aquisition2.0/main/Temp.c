@@ -6,7 +6,7 @@ void ler_temperatura_adc(Temp_ADC *p) {
     int adc_value = adc1_get_raw(ADC1_CHANNEL_4);
     float temp_value = ((float)adc_value / ADC_Max_value);
         p->TerceiraCamada[p->index__Terceiro] = temp_value;
-
+// arrumar o contador das interações 
         p->index__Terceiro = (p->index__Terceiro + 1) % TerceiraCamada_Length;
 
     if (p->index__Terceiro == 0) {
