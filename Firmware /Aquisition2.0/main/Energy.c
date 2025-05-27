@@ -52,21 +52,34 @@ void After_Acquisition(Energy_ADC *p) {
 
     // Verifica se o buffer do segundo nível está completo
     if (p->index_segundo == 0) {
-        float media_segundo = calcular_media(p->SegundaCamada, SecondLevel_Length);
-        ESP_LOGI("BUFFER2", "[%s] Buffer do segundo nível completo. Média: %.3f", p->tipo, media_segundo);
 
         // ---- Terceiro nivel --------
-        p->TerceiraCamada[p->index__Terceiro] = media_segundo;
+        p->TerceiraCamada[p->index__Terceiro] = calcular_media(p->SegundaCamada, SecondLevel_Length);
 
         // Incrementa os índices do terceiro nível
         p->index__Terceiro = (p->index__Terceiro + 1) % TerceiraCamada_Length;
-        ESP_LOGI("BUFFER3", "Novo índice do terceiro nível: %d", p->index__Terceiro);
-
-        if (p->index__Terceiro == 0) {
-            ESP_LOGI("BUFFER3", "Buffer do terceiro nível completo.");
-            
-        }
+        ESP_LOGI("BUFFER2", "[%s] Buffer do segundo nível completo. Média: %.3f", p->tipo, calcular_media(p->SegundaCamada, SecondLevel_Length));
     }
+
+    if (p->index__Terceiro == 0) {
+            ESP_LOGI("BUFFER3", "Buffer do terceiro nível completo.");
+                // Calculo da média do terceiro nivel e armazenando no index do quarto
+            p->QuartaCamada[p->index__quarto] = calcular_media(p->TerceiraCamada, TerceiraCamada_Length);
+                // Incrementa os indices do Quarto nivel
+            p->index__quarto = (p->index__quarto + 1) % QuartaCamada_Length;
+                // Log de Debug
+            ESP_LOGI("BUFFER2", "[%s] Buffer do terciro nível completo. Média: %.3f", p->tipo, calcular_media(p->TerceiraCamada, TerceiraCamada_Length));
+        }
+
+    if (p->index__quarto == 0)    {
+        ESP_LOGI("BUFFER3", "Buffer do terceiro nível completo.");
+        // Calculo da média do terceiro nivel e armazenando no index do quarto
+        p->QuintaCamada[p->index__Quinto] = calcular_media(p->QuartaCamada, QuartaCamada_Length);
+        // Incrementa os indices do Quarto nivel
+        p->index__Quinto = (p->index__Quinto + 1) % QuintaCamada_Length;
+        ESP_LOGI("BUFFER2", "[%s] Buffer do Quarto nível completo. Média: %.3f", p->tipo, calcular_media(p->QuartaCamada, QuartaCamada_Length));
+    }
+
 }
 
 float calcular_media(const float *vetor, int tamanho) {

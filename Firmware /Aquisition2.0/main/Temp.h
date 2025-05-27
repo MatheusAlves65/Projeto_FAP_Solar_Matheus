@@ -1,19 +1,23 @@
 #ifndef Temp_H
 #define Temp_H
 
-#define SecondLevel_Length           15
-#define TerceiraCamada_Length        10
+#define TerceiraCamada_Length        200 // 10 min
+#define QuartaCamada_Length          12  // 120 min
+#define QuintaCamada_Length          1 // 2 horas
 typedef struct {
     float media;
-    float SegundaCamada[SecondLevel_Length];    
     float TerceiraCamada[TerceiraCamada_Length];
-    uint8_t index_segundo;    
+    float QuartaCamada[QuartaCamada_Length];
+    float QuintaCamada[QuintaCamada_Length];
     uint8_t index__Terceiro;
+    uint8_t index__quarto;
+    uint8_t index__Quinto;
+    const char* tipo;
 }Temp_ADC ;
 
 
 void adc_init_temp(void);
 
-
+void ler_temperatura_adc(Temp_ADC *p);
 
 #endif

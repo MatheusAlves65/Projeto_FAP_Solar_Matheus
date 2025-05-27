@@ -8,11 +8,11 @@
 #define V_REF 1100.0 // Referência do ADC em mV (ajuste conforme necessário)
 
 
-#define PrimeiraCamada_Length        192
-#define SecondLevel_Length           15
-#define TerceiraCamada_Length        10
-#define QuartaCamada_Length          12
-#define QuintaCamada_Length          1
+#define PrimeiraCamada_Length        192 // 0.2s
+#define SecondLevel_Length           15 // 3s
+#define TerceiraCamada_Length        200 // 10 min
+#define QuartaCamada_Length          12  // 120 min
+#define QuintaCamada_Length          1 // 2 horas
 
 float calcular_media(const float *vetor, int tamanho);
 
