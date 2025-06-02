@@ -1,12 +1,12 @@
 #ifndef Temp_H
 #define Temp_H
 
-#define TerceiraCamada_Length        200 // 10 min
+#define TerceiraCamada_temp_Length        200 // 10 min
 #define QuartaCamada_Length          12  // 120 min
 #define QuintaCamada_Length          1 // 2 horas
 typedef struct {
     float media;
-    float TerceiraCamada[TerceiraCamada_Length];
+    float TerceiraCamada[TerceiraCamada_temp_Length];
     float QuartaCamada[QuartaCamada_Length];
     float QuintaCamada[QuintaCamada_Length];
     uint8_t index__Terceiro;

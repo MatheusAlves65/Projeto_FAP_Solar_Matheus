@@ -13,7 +13,7 @@ void Instantaneous_Energy(){ // primeiro nivel do buffer
 void Continuous_Energy(){
     After_Acquisition(&Voltage);
     After_Acquisition(&Current);
-    Temp_ADC Temperatura = {.tipo = "Temperatura"};
+    ler_temperatura_adc(&Temperatura);
 
 }
 
