@@ -1,7 +1,7 @@
 {
     "C_Cpp.intelliSenseEngine": "default",
     "idf.espIdfPath": "/Users/matheus/esp/v5.4.1/esp-idf",
-    "idf.pythonInstallPath": "/Users/matheus/radioconda/bin/python",
+    "idf.pythonInstallPath": "C:\\Users\\mathe\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
     "idf.openOcdConfigs": [
         "board/esp32c6-builtin.cfg"
     ],
@@ -12,5 +12,8 @@
         "ESP_ROM_ELF_DIR": "/Users/matheus/.espressif/tools/esp-rom-elfs/20240305/",
         "IDF_TARGET": "esp32c6"
     },
-    "idf.flashType": "UART"
+    "idf.flashType": "UART",
+    "idf.espIdfPathWin": "C:\\Users\\mathe\\esp\\v5.4.1\\esp-idf",
+    "idf.toolsPathWin": "C:\\Users\\mathe\\.espressif",
+    "idf.portWin": "COM4"
 }
