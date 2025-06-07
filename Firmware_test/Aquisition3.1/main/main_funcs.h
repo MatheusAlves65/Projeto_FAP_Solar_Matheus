@@ -11,7 +11,7 @@ void Instantaneous_Energy(void);
 
 void Continuous_Energy(void);
 
-
+void Initialize_Parameters(void);
 
 #endif
 

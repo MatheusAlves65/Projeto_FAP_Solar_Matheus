@@ -9,6 +9,37 @@ int adc_value_2;
 int adc_value_3;
 extern volatile bool buffer_completo; // Use a variável global
 
+
+
+void Energy_ADC_Init(Energy_ADC *p) {
+    // Zera índices
+    p->index_primeiro = 0;
+    p->index_segundo = 0;
+    p->index__Terceiro = 0;
+    p->index__quarto = 0;
+    p->index__Quinto = 0;
+
+    // Zera buffers
+    for (int i = 0; i < PrimeiraCamada_Length; i++) {
+        p->PrimeiraCamada[i] = 0.0f;
+    }
+    for (int i = 0; i < SecondLevel_Length; i++) {
+        p->SegundaCamada[i] = 0.0f;
+    }
+    for (int i = 0; i < TerceiraCamada_Length; i++) {
+        p->TerceiraCamada[i] = 0.0f;
+    }
+    for (int i = 0; i < QuartaCamada_Length; i++) {
+        p->QuartaCamada[i] = 0.0f;
+    }
+    for (int i = 0; i < QuintaCamada_Length; i++) {
+        p->QuintaCamada[i] = 0.0f;
+    }
+
+    p->instant_value = 0.0f;
+    p->media = 0.0f;
+}
+
 void adc_setup(void) {
     // Inicializar o ADC
     adc1_channel_t channel2 = ADC1_CHANNEL_2;
@@ -25,7 +56,7 @@ void adc_setup(void) {
 void Instant_Acquisition(Energy_ADC *p) {
     adc_value_2 = adc1_get_raw(p->adc_channel);
 
-    p->instant_value = ((float)adc_value_2 / ADC_Max_value) * V_REF;
+    p->instant_value = ((float)adc_value_2 / ADC_Max_value) * V_REF; // depois jogar o ganho de cada sensor!!!!!!!
 
     // Armazena os valores no buffer do primeiro nível
     p->PrimeiraCamada[p->index_primeiro] = p->instant_value;
@@ -45,58 +76,49 @@ void After_Acquisition(Energy_ADC *p) {
     static int64_t tempo_inicio_segundo = 0; // Armazena o tempo da primeira escrita
     static int64_t tempo_inicio_terceiro = 0; // Armazena o tempo da primeira escrita
     static int64_t tempo_inicio_quarto = 0; // Armazena o tempo da primeira escrita
+    static int64_t tempo_acumulado_terceiro = 0; // Acumula o tempo dos ciclos do segundo nível
     // Armazena as médias do primeiro nível no segundo nível
     p->SegundaCamada[p->index_segundo] = p->media;
     
-        // Inicio da medição do Segundo nivel
-    if (p->index_segundo == 0) {
-        tempo_inicio_segundo = esp_timer_get_time();
-    }
-
     p->index_segundo = (p->index_segundo + 1) % SecondLevel_Length;
     ESP_LOGI("BUFFER2", "Novo índice do segundo nível: %d", p->index_segundo);
 
     // Verifica se o buffer do segundo nível está completo
     if (p->index_segundo == 0) {
+        tempo_inicio_segundo = esp_timer_get_time();
         int64_t tempo_fim_segundo = esp_timer_get_time();
-        int64_t tempo_total_second = tempo_fim_segundo - tempo_inicio_segundo;
-        int64_t delta_us = tempo_total_second;
-            float delta_s = delta_us / 1000000.0;
-        ESP_LOGI("BUFFER2", "[%s] Tempo para preencher todo o buffer do segundo nível: %.2f s",p->tipo, delta_s);
+        int64_t tempo_ciclo_segundo = tempo_fim_segundo - tempo_inicio_segundo;
+        float delta_s = tempo_ciclo_segundo / 1000000.0f;
+        ESP_LOGI("BUFFER2", "[%s] Tempo para preencher todo o buffer do segundo nível: %.2f s", p->tipo, delta_s);
+
+        tempo_acumulado_terceiro += tempo_ciclo_segundo; // Soma ao acumulador do terceiro nível
 
         // ---- Terceiro nivel --------
+
         p->TerceiraCamada[p->index__Terceiro] = calcular_media(p->SegundaCamada, SecondLevel_Length);
 
-        // Incrementa os índices do terceiro nível
         p->index__Terceiro = (p->index__Terceiro + 1) % TerceiraCamada_Length;
-        ESP_LOGI("BUFFER2", "[%s] Buffer do segundo nível completo. Média: %.3f", p->tipo, calcular_media(p->SegundaCamada, SecondLevel_Length));
     }
 
-        // Inicio da medição do Terceiro nivel
- if (p->index__Terceiro == 0) {
-        tempo_inicio_terceiro = esp_timer_get_time();
-        ESP_LOGI("BUFFER3", "Tempo terceiro buffer: %" PRId64, tempo_inicio_terceiro);
-    }
+        // Inicio da medição do Terceiro niv
 
 
     if (p->index__Terceiro == 0) {
-        int64_t tempo_fim_terceiro = esp_timer_get_time();
-        int64_t tempo_total_terceiro = tempo_fim_terceiro - tempo_inicio_terceiro;
-        int64_t delta_us_terceiro = tempo_total_terceiro;
-        float delta_s_terceiro = delta_us_terceiro / 1000000.0;
-        ESP_LOGI("BUFFER2", "[%s] Tempo para preencher todo o buffer do terceiro nível: %.2f s",p->tipo, delta_s_terceiro);
-            ESP_LOGI("BUFFER3", "Buffer do terceiro nível completo.");
+       // int64_t tempo_fim_terceiro = esp_timer_get_time();
+        //int64_t tempo_total_terceiro = tempo_fim_terceiro - tempo_inicio_terceiro;
+        // delta_us_terceiro = tempo_total_terceiro;
+        //float delta_s_terceiro = delta_us_terceiro / 1000000.0;
+        //ESP_LOGI("BUFFER3", "[%s] Tempo para preencher todo o buffer do terceiro nível: %.2f s",p->tipo, delta_s_terceiro);
+        ESP_LOGI("BUFFER3", "Buffer do terceiro nível completo.");
                 // Calculo da média do terceiro nivel e armazenando no index do quarto
             p->QuartaCamada[p->index__quarto] = calcular_media(p->TerceiraCamada, TerceiraCamada_Length);
                 // Incrementa os indices do Quarto nivel
             p->index__quarto = (p->index__quarto + 1) % QuartaCamada_Length;
                 // Log de Debug
             ESP_LOGI("BUFFER3", "[%s] Buffer do terciro nível completo. Média: %.3f", p->tipo, calcular_media(p->TerceiraCamada, TerceiraCamada_Length));
+            tempo_inicio_terceiro = 0;
         }
-        // Inicio da medição do Quarto nivel
-         if (p->index__quarto == 0) {
-        tempo_inicio_quarto = esp_timer_get_time();
-    }
+
 
 
     if (p->index__quarto == 0)    {

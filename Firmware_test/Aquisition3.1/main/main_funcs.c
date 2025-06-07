@@ -17,5 +17,12 @@ void Continuous_Energy(){
 
 }
 
+void Initialize_Parameters(){
+    Energy_ADC_Init(&Voltage);
+    Energy_ADC_Init(&Current);
+    //Energy_ADC_Init(&Temperatura);
+
+
+}
 
 

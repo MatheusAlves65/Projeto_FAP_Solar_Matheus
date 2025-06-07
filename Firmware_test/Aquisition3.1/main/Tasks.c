@@ -23,6 +23,7 @@ void voltage_read(void *param) {
 
     // Inicialização do ADC
     adc_setup();
+    Initialize_Parameters();
 
     // Inicia o Timer e passa o semaphore
     iniciar_timer(timer_semaphore);

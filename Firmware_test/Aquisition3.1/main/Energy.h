@@ -49,6 +49,7 @@ void Instant_Acquisition(Energy_ADC *p);
 void After_Acquisition(Energy_ADC *p);
 
 void adc_init_temp (void);
+void Energy_ADC_Init(Energy_ADC *p);
 
 
 
