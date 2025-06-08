@@ -1,0 +1,229 @@
+I (875) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 763.475
+I (875) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 774.378
+I (885) BUFFER2: Novo índice do segundo nível: 3
+I (885) BUFFER3: Buffer do terceiro nível completo.
+I (895) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (895) BUFFER2: Novo índice do segundo nível: 3
+I (905) BUFFER3: Buffer do terceiro nível completo.
+I (905) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (915) Temperatura: Buffer do terceiro nível completo.
+I (915) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (1075) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 785.996
+I (1075) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 867.876
+I (1085) BUFFER2: Novo índice do segundo nível: 4
+I (1085) BUFFER3: Buffer do terceiro nível completo.
+I (1095) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (1095) BUFFER2: Novo índice do segundo nível: 4
+I (1105) BUFFER3: Buffer do terceiro nível completo.
+I (1105) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (1115) Temperatura: Buffer do terceiro nível completo.
+I (1115) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (1275) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 718.991
+I (1275) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 845.719
+I (1285) BUFFER2: Novo índice do segundo nível: 5
+I (1285) BUFFER3: Buffer do terceiro nível completo.
+I (1295) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (1295) BUFFER2: Novo índice do segundo nível: 5
+I (1305) BUFFER3: Buffer do terceiro nível completo.
+I (1305) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (1315) Temperatura: Buffer do terceiro nível completo.
+I (1315) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (1475) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 720.899
+I (1475) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 839.637
+I (1485) BUFFER2: Novo índice do segundo nível: 6
+I (1485) BUFFER3: Buffer do terceiro nível completo.
+I (1495) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (1495) BUFFER2: Novo índice do segundo nível: 6
+I (1505) BUFFER3: Buffer do terceiro nível completo.
+I (1505) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (1515) Temperatura: Buffer do terceiro nível completo.
+I (1515) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (1675) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 721.166
+I (1675) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 840.428
+I (1685) BUFFER2: Novo índice do segundo nível: 7
+I (1685) BUFFER3: Buffer do terceiro nível completo.
+I (1695) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (1695) BUFFER2: Novo índice do segundo nível: 7
+I (1705) BUFFER3: Buffer do terceiro nível completo.
+I (1705) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (1715) Temperatura: Buffer do terceiro nível completo.
+I (1715) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (1875) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 717.473
+I (1875) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 839.862
+I (1885) BUFFER2: Novo índice do segundo nível: 8
+I (1885) BUFFER3: Buffer do terceiro nível completo.
+I (1895) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (1895) BUFFER2: Novo índice do segundo nível: 8
+I (1905) BUFFER3: Buffer do terceiro nível completo.
+I (1905) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (1915) Temperatura: Buffer do terceiro nível completo.
+I (1915) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (2075) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 702.588
+I (2075) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 830.462
+I (2085) BUFFER2: Novo índice do segundo nível: 9
+I (2085) BUFFER3: Buffer do terceiro nível completo.
+I (2095) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (2095) BUFFER2: Novo índice do segundo nível: 9
+I (2105) BUFFER3: Buffer do terceiro nível completo.
+I (2105) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (2115) Temperatura: Buffer do terceiro nível completo.
+I (2115) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (2275) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 696.073
+I (2275) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 827.890
+I (2285) BUFFER2: Novo índice do segundo nível: 10
+I (2285) BUFFER3: Buffer do terceiro nível completo.
+I (2295) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (2295) BUFFER2: Novo índice do segundo nível: 10
+I (2305) BUFFER3: Buffer do terceiro nível completo.
+I (2305) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (2315) Temperatura: Buffer do terceiro nível completo.
+I (2315) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (2475) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 720.720
+I (2475) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 837.591
+I (2485) BUFFER2: Novo índice do segundo nível: 11
+I (2485) BUFFER3: Buffer do terceiro nível completo.
+I (2495) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (2495) BUFFER2: Novo índice do segundo nível: 11
+I (2505) BUFFER3: Buffer do terceiro nível completo.
+I (2505) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (2515) Temperatura: Buffer do terceiro nível completo.
+I (2515) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (2675) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 650.406
+I (2675) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 809.787
+I (2685) BUFFER2: Novo índice do segundo nível: 12
+I (2685) BUFFER3: Buffer do terceiro nível completo.
+I (2695) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (2695) BUFFER2: [Tensao] Tempo para preencher todo o buffer do quarto nível: 2.50 s
+I (2705) BUFFER4: Buffer do quarto nível completo.
+I (2715) BUFFER4: [Tensao] Buffer do Quarto nível completo. Média: 0.000
+I (2715) BUFFER2: Novo índice do segundo nível: 12
+I (2725) BUFFER3: Buffer do terceiro nível completo.
+I (2725) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (2735) BUFFER2: [Corrente] Tempo para preencher todo o buffer do quarto nível: 2.53 s
+I (2745) BUFFER4: Buffer do quarto nível completo.
+I (2745) BUFFER4: [Corrente] Buffer do Quarto nível completo. Média: 0.000
+I (2755) Temperatura: Buffer do terceiro nível completo.
+I (2755) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (2765) Temperatura: Buffer do terceiro nível completo.
+I (2775) Temperatura: [Temperatura] Buffer do Quarto nível completo. Média: 0.000
+I (2875) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 745.866
+I (2875) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 852.810
+I (2885) BUFFER2: Novo índice do segundo nível: 13
+I (2885) BUFFER3: Buffer do terceiro nível completo.
+I (2895) BUFFER3: [Tensao] Buffer do terciro nível completo. Média: 0.000
+I (2895) BUFFER2: Novo índice do segundo nível: 13
+I (2905) BUFFER3: Buffer do terceiro nível completo.
+I (2905) BUFFER3: [Corrente] Buffer do terciro nível completo. Média: 0.000
+I (2915) Temperatura: Buffer do terceiro nível completo.
+I (2915) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (3075) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 754.931
+I (3075) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 855.115
+I (3085) BUFFER2: Novo índice do segundo nível: 14
+I (3085) BUFFER2: Novo índice do segundo nível: 14
+I (3095) Temperatura: Buffer do terceiro nível completo.
+I (3095) Temperatura: [Temperatura] Buffer do terciro nível completo. Média: 0.000
+I (3275) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 756.134
+I (3275) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 860.771
+I (3295) Temperatura: Feita a leitura:0.000
+I (3285) BUFFER2: Novo índice do segundo nível: 1
+I (3295) Temperatura: 15 interações feitas (~3s)
+I (3285) BUFFER2: Novo índice do segundo nível: 1
+I (3475) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 768.009
+I (3475) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 834.718
+I (3485) BUFFER2: Novo índice do segundo nível: 2
+I (3485) BUFFER2: Novo índice do segundo nível: 2
+I (3675) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 747.401
+I (3675) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 786.957
+I (3685) BUFFER2: Novo índice do segundo nível: 3
+I (3685) BUFFER2: Novo índice do segundo nível: 3
+I (3875) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 720.303
+I (3875) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 753.943
+I (3885) BUFFER2: Novo índice do segundo nível: 4
+I (3885) BUFFER2: Novo índice do segundo nível: 4
+I (4075) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 724.566
+I (4075) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 751.966
+I (4085) BUFFER2: Novo índice do segundo nível: 5
+I (4085) BUFFER2: Novo índice do segundo nível: 5
+I (4275) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 748.095
+I (4275) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 775.634
+I (4285) BUFFER2: Novo índice do segundo nível: 6
+I (4285) BUFFER2: Novo índice do segundo nível: 6
+I (4475) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 743.811
+I (4475) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 775.131
+I (4485) BUFFER2: Novo índice do segundo nível: 7
+I (4485) BUFFER2: Novo índice do segundo nível: 7
+I (4675) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 734.093
+I (4685) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 768.963
+I (4685) BUFFER2: Novo índice do segundo nível: 8
+I (4685) BUFFER2: Novo índice do segundo nível: 8
+I (4875) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 723.932
+I (4885) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 764.185
+I (4885) BUFFER2: Novo índice do segundo nível: 9
+I (4885) BUFFER2: Novo índice do segundo nível: 9
+I (5075) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 732.812
+I (5085) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 773.485
+I (5085) BUFFER2: Novo índice do segundo nível: 10
+I (5085) BUFFER2: Novo índice do segundo nível: 10
+I (5275) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 750.925
+I (5285) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 789.749
+I (5285) BUFFER2: Novo índice do segundo nível: 11
+I (5285) BUFFER2: Novo índice do segundo nível: 11
+I (5475) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 757.402
+I (5485) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 791.379
+I (5485) BUFFER2: Novo índice do segundo nível: 12
+I (5485) BUFFER2: Novo índice do segundo nível: 12
+I (5675) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 762.918
+I (5685) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 785.531
+I (5685) BUFFER2: Novo índice do segundo nível: 13
+I (5685) BUFFER2: Novo índice do segundo nível: 13
+I (5875) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 760.592
+I (5885) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 797.042
+I (5885) BUFFER2: Novo índice do segundo nível: 14
+I (5885) BUFFER2: Novo índice do segundo nível: 14
+I (6085) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 753.999
+I (6085) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 786.568
+I (6085) BUFFER2: Novo índice do segundo nível: 1
+I (6085) BUFFER2: Novo índice do segundo nível: 1
+I (6285) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 758.112
+I (6285) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 791.821
+I (6285) BUFFER2: Novo índice do segundo nível: 2
+I (6285) BUFFER2: Novo índice do segundo nível: 2
+I (6295) Temperatura: Tempo entre leituras de temperatura: 3.00 s
+I (6295) Temperatura: 15 interações feitas (~3s)
+I (6305) Temperatura: Feita a leitura:0.005
+I (6485) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 759.826
+I (6485) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 798.535
+I (6485) BUFFER2: Novo índice do segundo nível: 3
+I (6485) BUFFER2: Novo índice do segundo nível: 3
+I (6685) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 764.075
+I (6685) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 798.603
+I (6685) BUFFER2: Novo índice do segundo nível: 4
+I (6685) BUFFER2: Novo índice do segundo nível: 4
+I (6885) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 768.501
+I (6885) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 812.807
+I (6885) BUFFER2: Novo índice do segundo nível: 5
+I (6885) BUFFER2: Novo índice do segundo nível: 5
+I (7085) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 783.954
+I (7085) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 832.814
+I (7085) BUFFER2: Novo índice do segundo nível: 6
+I (7085) BUFFER2: Novo índice do segundo nível: 6
+I (7285) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 774.267
+I (7285) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 805.474
+I (7285) BUFFER2: Novo índice do segundo nível: 7
+I (7285) BUFFER2: Novo índice do segundo nível: 7
+I (7485) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 779.984
+I (7485) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 818.461
+I (7485) BUFFER2: Novo índice do segundo nível: 8
+I (7485) BUFFER2: Novo índice do segundo nível: 8
+I (7685) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 780.503
+I (7685) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 816.449
+I (7685) BUFFER2: Novo índice do segundo nível: 9
+I (7685) BUFFER2: Novo índice do segundo nível: 9
+I (7885) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 779.995
+I (7885) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 809.706
+I (7885) BUFFER2: Novo índice do segundo nível: 10
+I (7885) BUFFER2: Novo índice do segundo nível: 10
+I (8085) BUFFER1: [Tensao] Buffer do primeiro nível completo. Média: 777.799
+I (8085) BUFFER1: [Corrente] Buffer do primeiro nível completo. Média: 815.385
+I (8085) BUFFER2: Novo índice do segundo nível: 11
+I (8085) BUFFER2: Novo índice do segundo nível: 11

@@ -11,7 +11,7 @@ extern volatile uint32_t contador_chamadas; // Declaração do contador global
 extern volatile bool buffer_completo; // Declaração do buffer_completo como variável global
 
 
-void voltage_read(void *param) {
+void Main_Measurement(void *param) {
     //ESP_LOGD("Tasks", "Task Voltage Read iniciando...\n");
 
     // Cria o semaphore binário

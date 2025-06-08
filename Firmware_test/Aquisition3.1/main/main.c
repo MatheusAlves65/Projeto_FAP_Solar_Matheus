@@ -3,11 +3,11 @@
 
 
 
-TaskHandle_t Handle_voltage_read;
+TaskHandle_t Handle_Main_Measurement;
 
 
 void app_main(void)
 {
-xTaskCreate(voltage_read, "voltage_read", 2048, NULL, tskIDLE_PRIORITY + 1, &Handle_voltage_read);
+xTaskCreate(Main_Measurement, "Medição_Principal", 2048, NULL, tskIDLE_PRIORITY + 1, &Handle_Main_Measurement);
 
 }

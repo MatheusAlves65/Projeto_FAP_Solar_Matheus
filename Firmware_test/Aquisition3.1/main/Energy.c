@@ -73,66 +73,60 @@ void Instant_Acquisition(Energy_ADC *p) {
 }
 
 void After_Acquisition(Energy_ADC *p) {
-    static int64_t tempo_inicio_segundo = 0; // Armazena o tempo da primeira escrita
-    static int64_t tempo_inicio_terceiro = 0; // Armazena o tempo da primeira escrita
-    static int64_t tempo_inicio_quarto = 0; // Armazena o tempo da primeira escrita
-    static int64_t tempo_acumulado_terceiro = 0; // Acumula o tempo dos ciclos do segundo nível
     // Armazena as médias do primeiro nível no segundo nível
     p->SegundaCamada[p->index_segundo] = p->media;
-    
-    p->index_segundo = (p->index_segundo + 1) % SecondLevel_Length;
     ESP_LOGI("BUFFER2", "Novo índice do segundo nível: %d", p->index_segundo);
 
-    // Verifica se o buffer do segundo nível está completo
-    if (p->index_segundo == 0) {
-        tempo_inicio_segundo = esp_timer_get_time();
-        int64_t tempo_fim_segundo = esp_timer_get_time();
-        int64_t tempo_ciclo_segundo = tempo_fim_segundo - tempo_inicio_segundo;
-        float delta_s = tempo_ciclo_segundo / 1000000.0f;
-        ESP_LOGI("BUFFER2", "[%s] Tempo para preencher todo o buffer do segundo nível: %.2f s", p->tipo, delta_s);
+    p->index_segundo++;
 
-        tempo_acumulado_terceiro += tempo_ciclo_segundo; // Soma ao acumulador do terceiro nível
+    // Verifica se o buffer do segundo nível está completo
+    if (p->index_segundo == SecondLevel_Length) {
+        /*tempo_fim_segundo = esp_timer_get_time();
+        int64_t tempo_total_segundo = tempo_fim_segundo - tempo_inicio_segundo;
+        float tempo_total_segundo_s = tempo_total_segundo / 1000000.0f;
+        ESP_LOGI("BUFFER2", "[%s] Tempo para preencher todo o buffer do segundo nível: %.2f s", p->tipo, tempo_total_segundo_s);*/
+        ESP_LOGI("BUFFER2", "Buffer do segundo nível completo.");
 
         // ---- Terceiro nivel --------
 
         p->TerceiraCamada[p->index__Terceiro] = calcular_media(p->SegundaCamada, SecondLevel_Length);
 
-        p->index__Terceiro = (p->index__Terceiro + 1) % TerceiraCamada_Length;
+        //p->index__Terceiro = (p->index__Terceiro + 1) % TerceiraCamada_Length;
+
+        p-> index__Terceiro++;
+
+        p-> index_segundo = 0;
+
     }
 
         // Inicio da medição do Terceiro niv
 
-
-    if (p->index__Terceiro == 0) {
-       // int64_t tempo_fim_terceiro = esp_timer_get_time();
-        //int64_t tempo_total_terceiro = tempo_fim_terceiro - tempo_inicio_terceiro;
-        // delta_us_terceiro = tempo_total_terceiro;
-        //float delta_s_terceiro = delta_us_terceiro / 1000000.0;
-        //ESP_LOGI("BUFFER3", "[%s] Tempo para preencher todo o buffer do terceiro nível: %.2f s",p->tipo, delta_s_terceiro);
+    ESP_LOGI("BUFFER3", "Novo índice do terceiro nível: %d", p->index__Terceiro);
+    if (p->index__Terceiro == TerceiraCamada_Length) {
+        //ESP_LOGI("BUFFER2", "Buffer do segundo nível completo.");
         ESP_LOGI("BUFFER3", "Buffer do terceiro nível completo.");
-                // Calculo da média do terceiro nivel e armazenando no index do quarto
+        ESP_LOGI("BUFFER3", "[%s] Buffer do terciro nível completo. Média: %.3f", p->tipo, calcular_media(p->TerceiraCamada, TerceiraCamada_Length));
+        // Quarto nivel
             p->QuartaCamada[p->index__quarto] = calcular_media(p->TerceiraCamada, TerceiraCamada_Length);
-                // Incrementa os indices do Quarto nivel
-            p->index__quarto = (p->index__quarto + 1) % QuartaCamada_Length;
-                // Log de Debug
-            ESP_LOGI("BUFFER3", "[%s] Buffer do terciro nível completo. Média: %.3f", p->tipo, calcular_media(p->TerceiraCamada, TerceiraCamada_Length));
-            tempo_inicio_terceiro = 0;
+        // Incrementa os indices do Quarto nivel
+
+        p->index__quarto++;
+
+        p-> index__Terceiro = 0;
+
+
         }
+    ESP_LOGI("BUFFER4", "Novo índice do Quarto nível: %d", p->index__quarto);
+    if (p->index__quarto == QuartaCamada_Length)    {
 
-
-
-    if (p->index__quarto == 0)    {
-        int64_t tempo_fim_quarto = esp_timer_get_time();
-        int64_t tempo_total_quarto = tempo_fim_quarto - tempo_inicio_quarto;
-        int64_t delta_us_quarto = tempo_total_quarto;
-        float delta_s_quarto = delta_us_quarto / 1000000.0;
-        ESP_LOGI("BUFFER2", "[%s] Tempo para preencher todo o buffer do quarto nível: %.2f s",p->tipo, delta_s_quarto);
         ESP_LOGI("BUFFER4", "Buffer do quarto nível completo.");
         // Calculo da média do terceiro nivel e armazenando no index do quarto
         p->QuintaCamada[p->index__Quinto] = calcular_media(p->QuartaCamada, QuartaCamada_Length);
-        // Incrementa os indices do Quarto nivel
-        p->index__Quinto = (p->index__Quinto + 1) % QuintaCamada_Length;
+
         ESP_LOGI("BUFFER4", "[%s] Buffer do Quarto nível completo. Média: %.3f", p->tipo, calcular_media(p->QuartaCamada, QuartaCamada_Length));
+
+        p->index__Quinto++;
+        p->index__quarto = 0;    
     }
 
 }
