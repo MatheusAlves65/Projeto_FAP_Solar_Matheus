@@ -1,16 +1,20 @@
-#ifndef ADC_CONFIG_H
-#define ADC_CONFIG_H
+#ifndef ENERGY_H
+#define ENERGY_H
 #define ADC_Max_value 4095
 #define Max_Value_Voltage 190.7
 #include <driver/adc.h>
+#include "libraries.h"
 // #include <driver/adc_types.h>
 
-#define V_REF 1100.0 // Referência do ADC em mV (ajuste conforme necessário)
+#define V_REF 3300.0 // Referência do ADC em mV (ajuste conforme necessário)
+
+
+
 
 
 #define PrimeiraCamada_Length        192 // 0.2s
-#define SecondLevel_Length           15 // 3s
-#define TerceiraCamada_Length        5 // 10 min
+#define SecondLevel_Length           16 // 3s
+#define TerceiraCamada_Length        200 // 10 min
 #define QuartaCamada_Length          12  // 120 min
 #define QuintaCamada_Length          1 // 2 horas
 
@@ -38,8 +42,9 @@ typedef struct {
     uint8_t index__Quinto;
     adc1_channel_t adc_channel;
     const char* tipo;
-
     uint32_t primeiro_nivel_ciclos; 
+    float max_threshold;                      
+    float min_threshold;  
 } Energy_ADC;
 
 void adc_setup(void);

@@ -9,6 +9,7 @@
 #include "Tasks.h"
 #include "Temp.h"
 #include "global.h"
+#include "Events.h"
 #include <stdio.h>
 #include <driver/adc.h>
 #include "freertos/FreeRTOS.h"
@@ -17,6 +18,9 @@
 #include "esp_log.h"
 #include <stdint.h>
 #include "esp_task_wdt.h"
+#include <esp_adc/adc_oneshot.h>
+#include "esp_adc/adc_cali.h"
+
 
 #include "esp_log.h" // Biblioteca para ESP_LOG
 

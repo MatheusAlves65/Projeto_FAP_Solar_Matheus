@@ -26,7 +26,7 @@ void Main_Measurement(void *param) {
     Initialize_Parameters();
 
     // Inicia o Timer e passa o semaphore
-    iniciar_timer(timer_semaphore);
+    iniciar_timer(timer_semaphore); // Timer que em toda ISR chama a função Instant_Acquisition - por fazer a aquisição instsntânea
 
     while (1) {
         // Aguarda o semaphore ser liberado pelo timer

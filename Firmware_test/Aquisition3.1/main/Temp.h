@@ -13,6 +13,7 @@ typedef struct {
     uint8_t index__quarto;
     uint8_t index__Quinto;
     const char* tipo;
+    float max_threshold;  
 }Temp_ADC ;
 
 float calcular_media_temp(const float *vetor, int tamanho);
