@@ -12,6 +12,10 @@ extern volatile bool buffer_completo;
 // Handle global para o ADC one-shot
 adc_oneshot_unit_handle_t adc1_handle;
 adc_cali_handle_t adc_cali_handle = NULL; // Handle global para calibração
+event_object overVoltageEvent;
+event_object overCurrentEvent;
+event_object overTempEvent;
+event_object underVoltageEvent; 
 
 void Energy_ADC_Init(Energy_ADC *p) {
     // Zera índices
@@ -58,6 +62,10 @@ void adc_setup(void) {
     adc_oneshot_config_channel(adc1_handle, ADC_CHANNEL_2, &chan_cfg); // Corrente
     adc_oneshot_config_channel(adc1_handle, ADC_CHANNEL_3, &chan_cfg); // Tensão
     adc_oneshot_config_channel(adc1_handle, ADC_CHANNEL_4, &chan_cfg); // Temperatura
+        led_rgb_set_color(0, 0, 255);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        led_rgb_off();
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
 
     // Inicializa calibração
     adc_cali_curve_fitting_config_t cali_config = {

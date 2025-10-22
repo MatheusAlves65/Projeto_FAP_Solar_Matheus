@@ -20,6 +20,7 @@
 #include "esp_task_wdt.h"
 #include <esp_adc/adc_oneshot.h>
 #include "esp_adc/adc_cali.h"
+#include "led_control.h"
 
 
 #include "esp_log.h" // Biblioteca para ESP_LOG
