@@ -1,0 +1,182 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <time.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/semphr.h"
+#include "esp_log.h" 
+#include "nvs_flash.h"
+#include "esp_timer.h" // Para timestamp em milissegundos se necessário
+
+// Inclusões dos seus módulos
+#include "Monitoring.h"
+#include "Temp.h"
+#include "Energy.h"
+#include "Events.h" // AQUI TRAZEMOS A FILA
+#include "mqtt.h"
+#include "MOSFET.h"
+#include "Timer.h"
+#include "esp_wifi.h"
+#include "Wifi.h"
+
+TaskHandle_t Handle_Main_Measurement;
+SemaphoreHandle_t Transmit; // Para transmissões normais (de rotina)
+
+extern volatile bool buffer_completo; 
+extern volatile bool event_flag_3s; 
+extern volatile bool log_pendente; 
+
+// =========================================================================
+// DEFINIÇÃO DAS VARIÁVEIS GLOBAIS (Agora com tempo_confirmacao_ms)
+// =========================================================================
+extern Energy_ADC Voltage = {
+    .adc_channel = ADC1_CHANNEL_2, 
+    .tipo = "Tensao", 
+    .max_threshold = 80, 
+    .min_threshold = 500, 
+    .Limiar_sup = 1.1, 
+    .Limiar_inf = 0.9, 
+    .offset = 0.48f, 
+    .ganho = 27.26f,
+    .tempo_confirmacao_ms = 2000, // Deve ficar 2 segundos (2000ms) acima do limiar para disparar
+    .contador_amostras = 0
+};
+
+extern Energy_ADC Current = {
+    .adc_channel = ADC1_CHANNEL_3, 
+    .tipo = "Corrente",
+    .max_threshold = 10, 
+    .min_threshold = 50000, 
+    .offset = 0.003f, 
+    .ganho = 6.66f,
+    .tempo_confirmacao_ms = 500, // Deve ficar 0.5 segundo (500ms) acima do limiar para disparar
+    .contador_amostras = 0
+};
+
+extern Temp_ADC Temperatura = {
+    .tipo = "Temperatura", 
+    .max_threshold = 100, 
+    .offset = 0.0f, 
+    .ganho = 1.0f
+};
+
+// =========================================================================
+// TAREFA 1: PRODUTOR (Aquisição e Verificação)
+// =========================================================================
+void Main_Measurement(void *param) {
+    ESP_LOGD("Tasks", "Task Measurement iniciando...\n");
+
+    SemaphoreHandle_t timer_semaphore = xSemaphoreCreateBinary();
+    if (timer_semaphore == NULL) vTaskDelete(NULL);
+
+    adc_setup();
+    MOSFET_Init();
+    Initialize_Parameters();
+
+    iniciar_timer(timer_semaphore); 
+
+    while (1) {
+        if (xSemaphoreTake(timer_semaphore, portMAX_DELAY) == pdTRUE) {
+            
+            // Imprime APENAS UMA VEZ quando o evento começar
+            if(log_pendente){
+                ESP_LOGW("EVENTO", "Leds acesos por evento critico detectado!");
+                log_pendente = false;
+            }
+
+            if (buffer_completo == true) {
+                Continuous_Energy();
+                
+                // --- ALIMENTA A FILA DE EVENTOS ---
+                // Se qualquer um dos dois (Tensão ou Corrente) entrar em modo Evento (false)
+                if (Voltage.state == false || Current.state == false) {
+                    // Tenta enviar o pacote. A função já tem um bloqueio interno para enviar só a cada 250ms!
+                    Enviar_Evento_Fila(Voltage.media, Current.media, Temperatura.media);
+                }
+
+                // --- ENVIO DE ROTINA (Opcional, mantém o seu envio padrão a cada 3s) ---
+                if(event_flag_3s){
+                    xSemaphoreGive(Transmit); 
+                    event_flag_3s = false; 
+                }
+
+                buffer_completo = false; 
+            }
+        }
+    }
+}
+
+// =========================================================================
+// TAREFA 2: CONSUMIDOR (MQTT)
+// =========================================================================
+void conectarWifi(void *pvParameters) {
+    mqtt_start(); // Inicia o MQTT
+    
+    PacoteEvento_t pacote_recebido;
+    char payload[256];
+
+    while (1) {
+        // A tarefa vai "dormir" aqui sem gastar CPU até que um pacote chegue na fila_eventos
+        if (xQueueReceive(fila_eventos, &pacote_recebido, portMAX_DELAY) == pdTRUE) {
+            
+            // Monta o JSON com os dados do pacote
+            snprintf(payload, sizeof(payload),
+                     "{\"timestamp\": %lld, \"tensao\": %.2f, \"corrente\": %.2f, \"temperatura\": %.2f, \"status\": \"ALERTA\"}",
+                     pacote_recebido.timestamp, 
+                     pacote_recebido.tensao, 
+                     pacote_recebido.corrente, 
+                     pacote_recebido.temperatura);
+
+            // Publica os dados de evento crítico
+            // (Para testar no seu broker: v1/devices/me/telemetry)
+            int msg_id = esp_mqtt_client_publish(
+                // Use a variável do seu mqtt.c, você pode precisar de um getter para mqtt_client
+                // Se a variável for local em mqtt.c, recomendo criar uma função mqtt_publicar(topic, payload) lá
+                mqtt_client, 
+                "v1/devices/me/telemetry", 
+                payload, 
+                0, 1, 0
+            );
+
+            if (msg_id >= 0) {
+                ESP_LOGI("MQTT", "Pacote de EMERGENCIA enviado: %s", payload);
+            } else {
+                ESP_LOGE("MQTT", "Falha ao enviar pacote de emergencia!");
+            }
+        }
+    }
+}
+
+// =========================================================================
+// INICIALIZAÇÃO
+// =========================================================================
+void app_main(void) {
+    // Inicialização do NVS
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+
+    Transmit = xSemaphoreCreateBinary();
+    if (Transmit == NULL) {
+        ESP_LOGE("Main", "Falha ao criar o semaphore de transmissão.");
+        return;
+    }
+
+    ESP_LOGI("Heap", "Memoria Livre Inicial: %lu bytes", esp_get_free_heap_size());
+    
+    // --- INICIALIZA A FILA DO FREERTOS (MUITO IMPORTANTE) ---
+    Inicializar_Fila_Eventos();
+
+    Wifi_Start();
+    mqtt_start();
+
+    // Cria as tarefas
+    xTaskCreate(Main_Measurement, "Medição_Principal", 4096, NULL, tskIDLE_PRIORITY + 2, &Handle_Main_Measurement);
+    
+    // Aumentei um pouco a prioridade e a memória da tarefa de Wi-Fi/MQTT
+    xTaskCreate(conectarWifi, "conectarWifi", 4096, NULL, tskIDLE_PRIORITY + 1, NULL);
+}
